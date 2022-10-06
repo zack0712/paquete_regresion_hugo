@@ -26,7 +26,7 @@ class LinearRegression():
   
   def prediccion(self,x_prediccion):
     self.ajuste()
-    x_prediccion = pd.DataFrame(x_prediccion).to_numpy().tolist()[0]
+    x_prediccion = pd.DataFrame(x_prediccion).to_numpy().tolist()[0]        
     return self.__b_0 + sum([valor*coeficiente for valor,coeficiente in zip(self.__lista_betas[1:],x_prediccion)])
 
   def elementos(self):
@@ -87,7 +87,8 @@ class LinearRegression():
     print(resultados_prueba)
 
   def jarque_bera(self):
-    u = self.__residuos
+    self.elementos() 
+    u = self.__residuales
     A = (sum(u@u.T@u)/self.__n) / (sum(u@u.T)/self.__n)**(3/2)
     K = (sum(u@u.T@u@u)/self.__n) / (sum(u@u.T)/self.__n)**(2)
     JB = self.__n*(((A**2)/6)+(((K-3)**2)/24))
